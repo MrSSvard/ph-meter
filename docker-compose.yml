@@ -9,7 +9,7 @@ services:
     networks:
       - phmeter
     volumes:
-      - /opt/grafana/influxdb:/var/lib/influxdb
+      - /opt/ph-meter/influxdb:/var/lib/influxdb
 
   graphite:
     image: graphiteapp/graphite-statsd
@@ -28,7 +28,7 @@ services:
     networks:
       - phmeter
     volumes:
-      - /opt/grafana/grafana:/var/lib/grafana
+      - /opt/ph-meter/grafana:/var/lib/grafana
 
 networks:
   phmeter:
