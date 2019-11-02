@@ -3,10 +3,7 @@ services:
   mosquitto:
     image: zappka/phmeter
     restart: always
-    environment:
-      MOSQ_PHMETER_PASS: <password>
-      MOSQ_USER_PASS: <password>
-      GF_SECURITY_ADMIN_PASSWORD: <password>
+    env_file: ph-meter.env
     ports:
       - 1883:1883
     networks:
@@ -25,14 +22,7 @@ services:
   grafana:
     image: grafana/grafana
     restart: always
-    environment:
-      GF_SECURITY_ADMIN_PASSWORD: <password>
-      GF_SERVER_ROOT_URL: http://phmeter.standersson.se
-      GF_DASHBOARDS_JSON_ENABLED: 'false'
-      GF_SMTP_ENABLED: 'true'
-      GF_SMTP_FROM_ADDRESS: phmeter@standersson.se
-      GF_SMTP_FROM_NAME: PH-Meter
-      GF_SMTP_HOST: 192.168.1.100:25
+    env_file: ../ph-meter.env
     ports:
       - 3000:3000
     networks:
