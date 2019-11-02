@@ -22,7 +22,7 @@ services:
   grafana:
     image: grafana/grafana
     restart: always
-    env_file: ../ph-meter.env
+    env_file: ph-meter.env
     ports:
       - 3000:3000
     networks:
