@@ -22,9 +22,8 @@ mosquitto_passwd -U /etc/mosquitto/pwfile
 
 /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf &
 
-# Start applications
+# Start influxd
 influxd &
-/run.sh &
 
 # Set up InfluxDB
 until influx -execute 'show databases'; do sleep .5; done
