@@ -4,8 +4,8 @@ up:
 	docker-compose up -d
 
 update:
-	docker-compose down
 	docker-compose pull
+	docker-compose down
 	docker-compose up --build -d
 
 down:
