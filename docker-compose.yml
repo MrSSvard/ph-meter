@@ -33,6 +33,3 @@ services:
 networks:
   phmeter:
 
-volumes:
-  phdata:
-  gfdata:
