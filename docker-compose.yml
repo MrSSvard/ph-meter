@@ -23,6 +23,8 @@ services:
     image: grafana/grafana
     restart: always
     env_file: ph-meter.env
+    environment: 
+      GF_INSTALL_PLUGINS: grafana-image-renderer
     ports:
       - 3000:3000
     networks:
@@ -32,4 +34,3 @@ services:
 
 networks:
   phmeter:
-
