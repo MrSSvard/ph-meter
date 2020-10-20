@@ -30,5 +30,12 @@ services:
     volumes:
       - /opt/ph-meter/grafana:/var/lib/grafana
 
+  renderer:
+    image: grafana/grafana-image-renderer:latest
+    ports:
+      - 8081
+    networks:
+      - phmeter
+
 networks:
   phmeter:
