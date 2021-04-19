@@ -6,6 +6,7 @@ LABEL version="2018.10.12"
 
 # Create unprivileged user
 RUN useradd -m mosq -u 1500
+RUN mkdir /run/mosquitto && chown mosq:mosq /run/mosquitto
 
 # Set timezone in container
 ENV TZ=Europe/Stockholm

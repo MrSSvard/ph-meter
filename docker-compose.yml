@@ -6,8 +6,6 @@ services:
     env_file: ph-meter.env
     ports:
       - 1883:1883
-    networks:
-      - phmeter
     volumes:
       - /opt/ph-meter/influxdb:/var/lib/influxdb
 
@@ -16,8 +14,6 @@ services:
     restart: always
     ports:
       - 2003:2003
-    networks:
-      - phmeter
 
   grafana:
     image: grafana/grafana
@@ -26,16 +22,25 @@ services:
     ports:
       - 3000:3000
     networks:
-      - phmeter
+      - default
+      - traefik
     volumes:
       - /opt/ph-meter/grafana:/var/lib/grafana
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.phmeter.entrypoints=web-secure"
+      - "traefik.http.routers.phmeter.rule=Host(`phmeter.svard.me`)"
+      - "traefik.http.routers.phmeter.tls=true"
+      - "traefik.http.routers.phmeter.tls.certresolver=letsencrypt"
+        #- "traefik.http.services.phmeter.loadbalancer.server.port=3000"
 
   renderer:
     image: grafana/grafana-image-renderer:latest
+    restart: always
     ports:
       - 8081
-    networks:
-      - phmeter
 
 networks:
-  phmeter:
+  traefik:
+    external:
+      name: traefik
